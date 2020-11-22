@@ -1,37 +1,60 @@
 import React, { Component } from 'react'
-// import { connect } from 'redux'
-import Logo from '../../components/Logo'
 import { Button, WingBlank, WhiteSpace, InputItem, List } from 'antd-mobile'
+import Logo from '../../components/Logo'
+import { login } from '../../redux/user.redux'
+import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 
+@connect(
+    state => state.user,
+    { login }
+)
 class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            
+            user: '',
+            pwd: '',
         }
-        this.handleChange = this.handleChange.bind(this);
+        this.handleRegister = this.handleRegister.bind(this);
+        this.handleLogin = this.handleLogin.bind(this);
     }
 
-    handleChange() {
-        console.log(this.props.history)
+    handleRegister() {
         this.props.history.push('/register')
+    }
+
+    handleLogin() {
+        this.props.login(this.state)
+    }
+
+    handleChange(key, val) {
+        this.setState({
+            [key]: val.trim(),
+        })
     }
 
     render() {
         return (
             <WingBlank>
+                {this.props.redirectTo ? <Redirect to={this.props.redirectTo} /> : null}
                 <Logo />
-                <h1>登录页</h1>
+                <h3 style={{ color: '#eb3941', textAlign: 'center' }}>{this.props.msg}</h3>
                 <List>
-                    <InputItem onChange={e=>{this.handleChange('user', e)}}>用户名</InputItem>
-                    <InputItem type='password'>密码</InputItem>
+                    <InputItem
+                        onChange={e => this.handleChange('user', e)}
+                    >用户名</InputItem>
+                    <InputItem
+                        type='password'
+                        onChange={e => this.handleChange('pwd', e)}
+                    >密码</InputItem>
                 </List>
                 <WhiteSpace />
                 <WhiteSpace />
-                <Button type='primary'>登录</Button>
+                <Button type='primary' onClick={this.handleLogin}>登录</Button>
                 <WhiteSpace />
                 <WhiteSpace />
-                <Button type='primary' onClick={this.handleChange}>注册</Button>
+                <Button type='primary' onClick={this.handleRegister}>注册</Button>
             </WingBlank>
         )
     }
