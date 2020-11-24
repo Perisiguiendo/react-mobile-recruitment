@@ -11,6 +11,7 @@ Router.get('/info', function (req, res) {
   if (!userid) {
     return res.json({ code: 1 });
   }
+
   User.findOne({ _id: userid }, _filter, function (err, doc) {
     if (err) {
       return res.json({ code: 1, msg: '后端出错了' });
@@ -35,12 +36,14 @@ Router.post('/register', function (req, res) {
     if (doc) {
       return res.json({ code: 1, msg: '用户名重复' })
     }
-    User.create({ user, pwd: md5Pwd(pwd), type }, function (err, doc) {
+    const userModel = new User({ user, pwd: md5Pwd(pwd), type })
+    userModel.save(function (err, doc) {
       if (err) {
-        return res.json({ code: 1, msg: '后端出错' })
+        return res.json({ code: 1, msg: '后端出错了' })
       }
-      // 写cookie
-      return res.json({ code: 0 })
+      const { user, type, _id } = doc;
+      res.cookie('userid', _id);
+      return res.json({ code: 0, data: { user, type, _id } })
     })
   })
 })

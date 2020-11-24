@@ -7,7 +7,6 @@ const ERROR_MSG = 'ERROR_MSG';
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 const LOAD_DATA = 'LOAD_DATA';
 
-
 const initState = {
   redirectTo: '',  // 用户要跳转页面
   isAuth: false, //用户是否登录
@@ -16,7 +15,6 @@ const initState = {
   type: '', // 类型
   repeatpwd: ''
 }
-
 
 // reducer
 export const user = (state = initState, action) => {
@@ -27,7 +25,7 @@ export const user = (state = initState, action) => {
     case LOGIN_SUCCESS:
       return { ...state, msg: '', redirectTo: getRedirectPath(action.payload), isAuth: true, ...action.data };
     case LOAD_DATA:
-      return { ...state, ...action.payload }
+      return { ...state, ...action.payload, redirectTo: getRedirectPath(action.payload) }
     case ERROR_MSG:
       return { ...state, isAuth: false, msg: action.msg };
     default:
@@ -38,13 +36,14 @@ export const user = (state = initState, action) => {
 function errorMsg(msg) {
   return { msg, type: ERROR_MSG }
 }
+
 function registerSuccess(data) {
-  return { payload: data, type: REGISTER_SUCCESS }
+  return { type: REGISTER_SUCCESS, payload: data }
 }
+
 function loginSuccess(data) {
   return { type: LOGIN_SUCCESS, payload: data }
 }
-
 
 export function loadData(userinfo) {
   return { type: LOAD_DATA, payload: userinfo }

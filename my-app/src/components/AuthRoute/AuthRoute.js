@@ -1,15 +1,21 @@
 import axios from 'axios';
-import React, { Component } from 'react'
+import { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { loadData } from '../../redux/user.redux'
-import { connect } from 'mongoose';
+import { connect } from 'react-redux'
 
+@withRouter
 @connect(
     null,
-    loadData
+    { loadData }
 )
 class AuthRoute extends Component {
     componentDidMount() {
+        const publicList = ['/login', '/register'];
+        const pathname = this.props.location.pathname;
+        if (publicList.indexOf(pathname) > -1) {
+            return null;
+        }
         /**
          * 获取用户信息
          * 1. 是否登录
@@ -24,7 +30,9 @@ class AuthRoute extends Component {
                     console.log(res.data);
                     if (res.data.code === 0) {
                         this.props.loadData(res.data.data);
+                        
                     } else {
+                        console.log('=======');
                         this.props.history.push('/login');
                     }
                 }
@@ -35,4 +43,4 @@ class AuthRoute extends Component {
     }
 }
 
-export default withRouter(AuthRoute)
+export default AuthRoute

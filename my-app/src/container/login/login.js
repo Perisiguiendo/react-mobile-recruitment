@@ -60,16 +60,4 @@ class Login extends Component {
     }
 }
 
-// function mapStateToProps() {
-
-// }
-
-// function mapDispatchToProps() {
-
-// }
-
 export default Login
-// connect(
-//     mapStateToProps,
-//     mapDispatchToProps
-// )(Login)
