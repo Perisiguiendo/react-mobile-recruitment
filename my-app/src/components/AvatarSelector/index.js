@@ -1,39 +1,49 @@
 import React, { Component } from 'react'
-import { ImagePicker, WingBlank } from 'antd-mobile'
+import { List, Grid } from 'antd-mobile'
 
+const data = Array.from(new Array(11)).map((_val, i) => ({
+    icon: 'https://zos.alipayobjects.com/rmsportal/hqQWgTXdrlmVVYi.jpeg',
+    text: `name${i}`,
+}));
 
-const data = [{
-    url: 'https://zos.alipayobjects.com/rmsportal/PZUUCKTRIHWiZSY.jpeg',
-    id: '2121',
-}, {
-    url: 'https://zos.alipayobjects.com/rmsportal/hqQWgTXdrlmVVYi.jpeg',
-    id: '2122',
-}];
-
-export default class AvatarSelector extends Component {
-    state = {
-        files: data,
-        multiple: false,
-    }
-
-    onChange = (files, type, index) => {
-        this.setState({
-            files,
-        });
+class AvatarSelector extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            url: '',
+            file: '',
+        }
     }
 
     render() {
-        const { files } = this.state;
+        const { url } = this.state;
+
+        const select = url ?
+            (<div style={{ height: 80, display: 'flex', alignItems: 'center', marginLeft: 10 }}>
+                <div>已选择头像</div>
+                <img style={{ width: 40, height: 50, marginLeft: 10 }} src={url} alt="profile" />
+            </div>)
+            :
+            (<div style={{ height: 80, display: 'flex', alignItems: 'center', marginLeft: 10 }}>请选择头像</div>)
         return (
             <div>
-                <ImagePicker
-                    files={files}
-                    onChange={this.onChange}
-                    onImageClick={(index, fs) => console.log(index, fs)}
-                    selectable={files.length < 7}
-                    multiple={this.state.multiple}
-                />
+                <List renderHeader={() => select}>
+                    <Grid
+                        data={data}
+                        activeStyle={false}
+                        columnNum={4}
+                        onClick={ele => {
+                            this.props.selectAvatar(ele.text)
+                            this.setState({
+                                url: ele.icon
+                            })
+                        }}
+                    />
+                </List>
+
             </div>
         )
     }
 }
+
+export default AvatarSelector

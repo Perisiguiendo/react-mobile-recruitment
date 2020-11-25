@@ -33,7 +33,7 @@ class Register extends Component {
     render() {
         const RadioItem = Radio.RadioItem;
         return (
-            <WingBlank>
+            <div>
                 {this.props.redirectTo ? <Redirect to={this.props.redirectTo} /> : null}
                 <Logo />
                 <h3 style={{ color: '#eb3941', textAlign: 'center' }}>{this.props.msg}</h3>
@@ -50,7 +50,7 @@ class Register extends Component {
                 <WhiteSpace />
                 <WhiteSpace />
                 <Button type='primary' onClick={this.handleRegister}>注册</Button>
-            </WingBlank>
+            </div>
         )
     }
 }
