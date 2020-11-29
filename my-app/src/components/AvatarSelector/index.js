@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { List, Grid } from 'antd-mobile'
+import propTypes from 'prop-types'
 
 const data = Array.from(new Array(11)).map((_val, i) => ({
     icon: 'https://zos.alipayobjects.com/rmsportal/hqQWgTXdrlmVVYi.jpeg',
@@ -7,6 +8,11 @@ const data = Array.from(new Array(11)).map((_val, i) => ({
 }));
 
 class AvatarSelector extends Component {
+
+    static propTypes = {
+        selectAvatar: propTypes.func.isRequired
+    }
+
     constructor(props) {
         super(props);
         this.state = {

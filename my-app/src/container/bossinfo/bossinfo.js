@@ -3,6 +3,7 @@ import { NavBar, List, InputItem, TextareaItem, Button, WingBlank, WhiteSpace } 
 import AvatarSelector from '../../components/AvatarSelector'
 import { connect } from 'react-redux'
 import { update } from '../../redux/user.redux'
+import { Redirect } from 'react-router-dom'
 
 @connect(
     state => state.user,
@@ -13,7 +14,7 @@ class BossInfo extends Component {
         super(props);
         this.state = {
             avatar: '',
-            title: '',
+            position: '',
             company: '',
             salary: '',
             request: '',
@@ -39,12 +40,15 @@ class BossInfo extends Component {
     render() {
         return (
             <div>
+                {this.props.redirectTo ? <Redirect to={this.props.redirectTo} /> : null}
                 <NavBar mode="dark">Boss完善信息页</NavBar>
                 <AvatarSelector
                     selectAvatar={this.selectAvatar}
                 />
+                <WhiteSpace />
+                <WhiteSpace />
                 <List>
-                    <InputItem onChange={e => this.handleChange('title', e)}
+                    <InputItem onChange={e => this.handleChange('position', e)}
                     >招聘职位</InputItem>
                     <InputItem onChange={e => this.handleChange('company', e)}
                     >公司名称</InputItem>

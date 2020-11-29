@@ -1,3 +1,4 @@
+const { json } = require('body-parser')
 const express = require('express')
 const utility = require('utility')
 
@@ -31,7 +32,6 @@ Router.get('/list', function (req, res) {
 
 Router.post('/register', function (req, res) {
   const { user, pwd, type } = req.body;
-  console.log(user, pwd, type);
   User.findOne({ user: user }, function (err, doc) {
     if (doc) {
       return res.json({ code: 1, msg: '用户名重复' })
@@ -57,6 +57,22 @@ Router.post('/login', function (req, res) {
     res.cookie('userid', doc._id);
     return res.json({ code: 0, data: doc })
   })
+})
+
+Router.post('/update', function (req, res) {
+  const userid = req.cookies.userid;
+  if (!userid) {
+    return res.json({ code: 1, msg: '后端出错了', userid: userid })
+  }
+  const body = req.body;
+  User.findByIdAndUpdate(userid, body, function (err, doc) {
+    const data = Object.assign({}, {
+      user: doc.user,
+      type: doc.type,
+    }, body)
+    return res.json({ code: 0, data })
+  })
+
 })
 
 

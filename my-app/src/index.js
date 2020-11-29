@@ -24,8 +24,9 @@ ReactDOM.render(
             <div>
                 <AuthRoute></AuthRoute>
                 <Switch>
-                    <Route path='/bossinfo' component={BossInfo} />
-                    <Route path='/geniusinfo' component={GeniusInfo} />
+                    {/* <Route path='/' exact component={Login} /> */}
+                    <Route path='/bossinfo' exact component={BossInfo} />
+                    <Route path='/geniusinfo' exact component={GeniusInfo} />
                     <Route path='/login' exact component={Login} />
                     <Route path='/register' exact component={Register} />
                 </Switch>
