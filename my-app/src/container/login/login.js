@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, WingBlank, WhiteSpace, InputItem, List } from 'antd-mobile'
+import { Button, WhiteSpace, InputItem, List } from 'antd-mobile'
 import Logo from '../../components/Logo'
 import { login } from '../../redux/user.redux'
 import { connect } from 'react-redux'
