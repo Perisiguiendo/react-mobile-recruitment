@@ -10,13 +10,16 @@ const models = {
         // 头像
         'avatar': { type: String },
         // 个人简介
-        'desc': { type: String },
+        'introduction': { type: String },
         // 岗位
-        'post': { type: String },
+        'position': { type: String },
         // 公司
         'company': { type: String },
         // 工资
-        'salary': { type: String }
+        'salary': { type: String },
+        // 岗位要求
+        'request': {type: String},
+        // 
     },
     chat: {
     }

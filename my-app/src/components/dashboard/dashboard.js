@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import { NavBar } from 'antd-mobile'
+import { connect } from 'react-redux'
+import { Route, Switch } from 'react-router-dom'
+
 import './index.css'
-import Boss from '../../container/boss/boss'
-import Genius from '../../container/genius/genius'
+import Boss from '../boss/boss'
+import Genius from '../genius/genius'
 import Msg from '../Msg'
 import User from '../User'
 import NavLinkBar from '../NavLinkBar'
-import { connect } from 'react-redux'
 
 @connect(
     state => state
@@ -61,12 +63,17 @@ class Dashboard extends Component {
                 <header>
                     <NavBar
                         mode="dark"
-                    >{navList.find(v => v.path = pathname).title}</NavBar>
+                        className='fixed-header'
+                    >{navList.find(v => v.path === pathname).title}</NavBar>
                 </header>
-                {/* <Route path='/boss' exact component={Boss} />
-                <Route path='/boss' exact component={Boss} />
-                <Route path='/boss' exact component={Boss} />
-                <Route path='/boss' exact component={Boss} /> */}
+                <div style={{ marginTop: 45 }}>
+                    <Switch>
+                        {navList.map(v => (
+                            <Route key={v.path} path={v.path} exact component={v.component} />
+                        ))}
+                    </Switch>
+                </div>
+
                 <footer>
                     <NavLinkBar data={navList} />
                 </footer>

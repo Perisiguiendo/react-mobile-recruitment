@@ -69,7 +69,7 @@ class BossInfo extends Component {
                 >保存</Button>
 
 
-            </div>
+            </div >
         )
     }
 }

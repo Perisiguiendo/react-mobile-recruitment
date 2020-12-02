@@ -17,7 +17,7 @@ export const user = (state = initState, action) => {
   console.log(action);
   switch (action.type) {
     case AUTH_SUCCESS:
-      return { ...state, msg: '', redirectTo: getRedirectPath(action.payload), ...action.data };
+      return { ...state, msg: '', redirectTo: getRedirectPath(action.payload), ...action.payload };
     case LOAD_DATA:
       return { ...state, ...action.payload, redirectTo: getRedirectPath(action.payload) };
     case ERROR_MSG:
