@@ -43,7 +43,6 @@ class NavLinkBar extends Component {
                                 selected={pathname === v.path}
                                 onPress={() => {
                                     this.props.history.push(v.path)
-
                                 }}
                             >
                             </TabBar.Item>
