@@ -10,7 +10,7 @@ import Register from './container/register/register'
 import BossInfo from './container/bossinfo/bossinfo'
 import GeniusInfo from './container/geniusinfo/geniusinfo'
 import AuthRoute from './components/AuthRoute/AuthRoute'
-import Dashboard from './components/dashboard/dashboard'
+import Dashboard from './components/DashBoard'
 import './config'
 import { applyMiddleware, compose, createStore } from 'redux'
 

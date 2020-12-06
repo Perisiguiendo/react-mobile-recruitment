@@ -133,3 +133,4 @@
 [1202/202205.412:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\lenovo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\5bf314ce-34f0-4679-99cc-080643644b04: 系统找不到指定的路径。 (0x3)
 [1202/202205.465:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\lenovo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\d3488d18-eaa0-4766-aaeb-99903a65a3ad: 系统找不到指定的路径。 (0x3)
 [1202/202205.512:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\lenovo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\23360a06-c1f4-451f-ac12-dc83503f8bb2: 系统找不到指定的路径。 (0x3)
+[1206/204942.436:ERROR:directory_reader_win.cc(43)] FindFirstFile: 系统找不到指定的路径。 (0x3)
