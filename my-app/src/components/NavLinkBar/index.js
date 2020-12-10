@@ -13,6 +13,7 @@ class NavLinkBar extends Component {
     constructor(props) {
         super(props);
     }
+    
     render() {
         const navList = this.props.data.filter(v => !v.hide);
         const { pathname } = this.props.location;
@@ -22,6 +23,7 @@ class NavLinkBar extends Component {
                     unselectedTintColor="#949494"
                     tintColor="#33A3F4"
                     barTintColor="white"
+                    tabBarPosition='bottom'
                 >
                     {
                         navList.map(v => (

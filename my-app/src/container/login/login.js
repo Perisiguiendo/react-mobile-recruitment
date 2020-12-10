@@ -37,7 +37,7 @@ class Login extends Component {
     render() {
         return (
             <div>
-                {this.props.redirectTo ? <Redirect to={this.props.redirectTo} /> : null}
+                {this.props.redirectTo && this.props.redirectTo != '/login' ? <Redirect to={this.props.redirectTo} /> : null}
                 <Logo />
                 <h3 style={{ color: '#eb3941', textAlign: 'center' }}>{this.props.msg}</h3>
                 <List>

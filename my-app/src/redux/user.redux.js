@@ -4,6 +4,7 @@ import { getRedirectPath } from '../utils'
 const ERROR_MSG = 'ERROR_MSG';
 const AUTH_SUCCESS = 'AUTH_SUCCESS';
 const LOAD_DATA = 'LOAD_DATA';
+const LOGOUT = 'LOGOUT';
 
 const initState = {
   redirectTo: '',  // 用户要跳转页面
@@ -22,6 +23,8 @@ export const user = (state = initState, action) => {
       return { ...state, ...action.payload, redirectTo: getRedirectPath(action.payload) };
     case ERROR_MSG:
       return { ...state, msg: action.msg };
+    case LOGOUT:
+      return { ...initState, redirectTo: '/login' };
     default:
       return state;
   }
@@ -38,6 +41,10 @@ function authSuccess(obj) {
 
 export function loadData(userinfo) {
   return { type: LOAD_DATA, payload: userinfo }
+}
+
+export function logoutSubmit() {
+  return { type: LOGOUT }
 }
 
 export function register({ user, pwd, repeatpwd, type }) {
