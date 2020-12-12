@@ -31,7 +31,16 @@ class User extends Component {
     }
 
     cancellation() {
-        console.log('cancellation');
+        const alert = Modal.alert;
+        alert('注销', '是否确认?', [
+            { text: '取消', onPress: () => console.log('cancel'), style: 'default' },
+            {
+                text: '确认', onPress: () => {
+                    browserCookie.erase('userid');
+                    this.props.logoutSubmit();
+                }
+            },
+        ])
     }
 
     render() {

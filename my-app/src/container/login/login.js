@@ -4,18 +4,16 @@ import Logo from '../../components/Logo'
 import { login } from '../../redux/user.redux'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
+import FormWrapper from '../../components/FromWrapper'
 
 @connect(
     state => state.user,
     { login }
 )
+@FormWrapper
 class Login extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            user: '',
-            pwd: '',
-        }
         this.handleRegister = this.handleRegister.bind(this);
         this.handleLogin = this.handleLogin.bind(this);
     }
@@ -25,28 +23,23 @@ class Login extends Component {
     }
 
     handleLogin() {
-        this.props.login(this.state)
-    }
-
-    handleChange(key, val) {
-        this.setState({
-            [key]: val.trim(),
-        })
+        this.props.login(this.props.state)
     }
 
     render() {
+        const props = this.props;
         return (
             <div>
-                {this.props.redirectTo && this.props.redirectTo != '/login' ? <Redirect to={this.props.redirectTo} /> : null}
+                {props.redirectTo && props.redirectTo != '/login' ? <Redirect to={props.redirectTo} /> : null}
                 <Logo />
                 <h3 style={{ color: '#eb3941', textAlign: 'center' }}>{this.props.msg}</h3>
                 <List>
                     <InputItem
-                        onChange={e => this.handleChange('user', e)}
+                        onChange={e => props.handleChange('user', e)}
                     >用户名</InputItem>
                     <InputItem
                         type='password'
-                        onChange={e => this.handleChange('pwd', e)}
+                        onChange={e => props.handleChange('pwd', e)}
                     >密码</InputItem>
                 </List>
                 <WhiteSpace />

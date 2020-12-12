@@ -11,6 +11,7 @@ import BossInfo from './container/bossinfo/bossinfo'
 import GeniusInfo from './container/geniusinfo/geniusinfo'
 import AuthRoute from './components/AuthRoute/AuthRoute'
 import Dashboard from './components/DashBoard'
+import Chat from './components/Chat'
 import './config'
 import { applyMiddleware, compose, createStore } from 'redux'
 
@@ -29,6 +30,7 @@ ReactDOM.render(
                     <Route path='/geniusinfo' exact component={GeniusInfo} />
                     <Route path='/login' exact component={Login} />
                     <Route path='/register' exact component={Register} />
+                    <Route path='/chat/:user' component={Chat}/>
                     <Route component={Dashboard} />
                 </Switch>
             </div>

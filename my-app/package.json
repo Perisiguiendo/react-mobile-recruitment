@@ -18,6 +18,8 @@
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.0",
+    "socket.io": "^3.0.4",
+    "socket.io-client": "^3.0.4",
     "utility": "^1.16.3",
     "web-vitals": "^0.2.4"
   },
