@@ -1,26 +1,26 @@
-import React, { Component } from 'react'
-import { NavBar } from 'antd-mobile'
-import { connect } from 'react-redux'
-import { Route, Switch } from 'react-router-dom'
+import React, { Component } from 'react';
+import { NavBar } from 'antd-mobile';
+import { connect } from 'react-redux';
+import { Route, Switch } from 'react-router-dom';
+import { getMsgList, recMsg } from '../../redux/chat.redux';
 
-import './index.css'
-import Boss from '../Boss/boss'
-import Genius from '../Genius/genius'
-import Msg from '../Msg'
-import User from '../User'
-import NavLinkBar from '../NavLinkBar'
+import './index.css';
+import Boss from '../Boss/boss';
+import Genius from '../Genius/genius';
+import Msg from '../Msg';
+import User from '../User';
+import NavLinkBar from '../NavLinkBar';
 
 @connect(
-    state => state
+    state => state,
+    { getMsgList, recMsg }
 )
 class Dashboard extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            selectedTab: 'redTab',
-            hidden: false,
-            fullScreen: false,
-        };
+    componentDidMount() {
+        if (!this.props.chat.chatmsg.length) {
+            this.props.getMsgList();
+            this.props.recMsg();
+        }
     }
 
     render() {

@@ -1,3 +1,7 @@
 .card__strong {
-    color: #797979;
-  }
+  color: #797979;
+}
+
+* {
+  touch-action: pan-y;
+}

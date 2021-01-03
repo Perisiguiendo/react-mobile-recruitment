@@ -1,9 +1,10 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const cookieParser = require('cookie-parser')
-const userRouter = require('./User')
-
-const app = express()
+const express = require('express');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const userRouter = require('./User');
+const model = require('./model');
+const Chat = model.getModel('chat');
+const app = express();
 
 // work with express
 const server = require('http').Server(app)
@@ -18,7 +19,11 @@ io.on('connection', function (socket) {
   console.log('user is login');
   socket.on('sendmsg', function (data) {
     console.log(data);
-    io.emit('recmsg', data)
+    const { from, to, msg } = data;
+    const chatid = [from, to].sort().join('_');
+    Chat.create({ chatid, from, to, content: msg }, function (err, doc) {
+      io.emit('recmsg', Object.assign({}, doc._doc))
+    })
   })
 })
 

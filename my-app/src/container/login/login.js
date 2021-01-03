@@ -30,7 +30,7 @@ class Login extends Component {
         const props = this.props;
         return (
             <div>
-                {props.redirectTo && props.redirectTo != '/login' ? <Redirect to={props.redirectTo} /> : null}
+                {props.redirectTo && props.redirectTo !== '/login' ? <Redirect to={props.redirectTo} /> : null}
                 <Logo />
                 <h3 style={{ color: '#eb3941', textAlign: 'center' }}>{this.props.msg}</h3>
                 <List>
