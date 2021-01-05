@@ -26,9 +26,11 @@ class Chat extends Component {
             this.props.getMsgList();
             this.props.recMsg();
         }
+    }
+
+    componentWillUnmount() {
         const to = this.props.match.params.user;
         this.props.readMsg(to);
-
     }
 
     fixCarousel = () => {

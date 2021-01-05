@@ -21,7 +21,7 @@ export function chat(state = initState, action) {
         case MSG_LIST:
             return { ...state, users: action.payload.users, chatmsg: action.payload.msgs, unread: action.payload.msgs.filter(v => !v.read && v.to === action.payload.userid).length };
         case MSG_READ:
-            return {};
+            return { ...state, chatmsg: state.chatmsg.map(v => ({ ...v, read: true })), unread: state.unread - action.payload.num };
         case MSG_RECV:
             const increment = action.payload.to === action.userid ? 1 : 0;
             console.log(state);
