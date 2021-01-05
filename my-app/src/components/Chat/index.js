@@ -4,13 +4,13 @@ import { connect } from 'react-redux';
 import io from 'socket.io-client';
 
 import './index.css'
-import { sendMsg, getMsgList, recMsg } from '../../redux/chat.redux';
+import { sendMsg, getMsgList, recMsg, readMsg } from '../../redux/chat.redux';
 import { getChatId } from '../../utils';
 const socket = io('ws://localhost:9093');
 
 @connect(
     state => state,
-    { sendMsg, getMsgList, recMsg }
+    { sendMsg, getMsgList, recMsg, readMsg }
 )
 class Chat extends Component {
     constructor(props) {
@@ -26,6 +26,9 @@ class Chat extends Component {
             this.props.getMsgList();
             this.props.recMsg();
         }
+        const to = this.props.match.params.user;
+        this.props.readMsg(to);
+
     }
 
     fixCarousel = () => {
@@ -56,7 +59,7 @@ class Chat extends Component {
         }
         const chatid = getChatId(userid, this.props.user._id);
         const chatmsg = this.props.chat.chatmsg.filter(v => v.chatid === chatid);
-        
+
         return (
             <div id='chat-page'>
                 <NavBar

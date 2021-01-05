@@ -33,11 +33,27 @@ export function chat(state = initState, action) {
 
 function msgList(msgs, users, userid) {
     console.log('MSG_LIST');
-    return { type: MSG_LIST, payload: { msgs, users, userid } }
+    return { type: MSG_LIST, payload: { msgs, users, userid } };
 }
 
 function msgRecv(data, userid) {
-    return { userid, type: MSG_RECV, payload: data }
+    return { userid, type: MSG_RECV, payload: data };
+}
+
+function msgRead({ from, to, num }) {
+    return { type: MSG_READ, payload: { from, to, num } };
+}
+
+export function readMsg(from) {
+    return (dispatch, getState) => {
+        axios.post('/user/readmsg', { from })
+            .then(res => {
+                const userid = getState().userid;
+                if (res.status === 200 && res.data.code === 0) {
+                    dispatch(msgRead({ userid, from, num: res.data.num }))
+                }
+            })
+    }
 }
 
 export function sendMsg({ from, to, msg }) {
